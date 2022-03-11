@@ -4,6 +4,6 @@ const config = require("../../config/varibleGlobals");
 module.exports = async () => {
   console.log(
     "this is my response =>>>>>>>",
-    await httpConection(config.PATH_CATEGORY, "girls")
+    await httpConection(config.PATH_CATEGORY, config.CATEGORY)
   );
 };
