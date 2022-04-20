@@ -9,13 +9,14 @@
     "lint": "eslint ./src",
     "lint:fix": "eslint ./src --fix",
     "lint:all": "npm run lint:fix && npm run format",
-    "format": "prettier --config .prettierrc.json src/**/*.js --write"
+    "format": "prettier --config .prettierrc.json src/**/*.js --write",
+    "prepare": "husky install"
   },
   "author": "Camilo Gallo",
   "license": "ISC",
   "devDependencies": {
     "eslint": "^8.13.0",
-    "husky": "^7.0.4",
+    "husky": "^7.0.0",
     "prettier": "^2.6.2"
   }
 }
