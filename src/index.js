@@ -1,2 +1,2 @@
-const app = require("./module/categoryAndEpisodies/getIDCategory");
+const app = require('./module/categoryAndEpisodies/getIDCategory');
 app();

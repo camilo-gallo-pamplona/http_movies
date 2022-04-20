@@ -1,31 +1,29 @@
-const https = require("https");
-const config = require("../config/varibleGlobals");
+const https = require('https');
+const config = require('../config/varibleGlobals');
 
-module.exports = (path, category, method = "GET") => {
-  return new Promise((resolve, reject) => {
-    const options = {
-      hostname: config.HOST_NAME,
-      path: `${path}${category}`,
-      method,
-    };
+module.exports = (path, category, method = 'GET') => {
+	return new Promise((resolve, reject) => {
+		const options = {
+			hostname: config.HOST_NAME,
+			path: `${path}${category}`,
+			method,
+		};
 
-    const httpRequest = https.request(options, (response) => {
-      console.log(`statusCode: ${response.statusCode}`);
+		const httpRequest = https.request(options, (response) => {
+			let data = '';
+			response.on('data', (chunk) => {
+				data += chunk.toString();
+			});
 
-      let data = "";
-      response.on("data", (chunk) => {
-        data += chunk.toString();
-      });
+			response.on('end', () => {
+				resolve(JSON.parse(data));
+			});
+		});
 
-      response.on("end", () => {
-        resolve(JSON.parse(data));
-      });
-    });
+		httpRequest.on('error', (error) => {
+			reject(new Error(error));
+		});
 
-    httpRequest.on("error", (error) => {
-      reject(new Error(error));
-    });
-
-    httpRequest.end();
-  });
+		httpRequest.end();
+	});
 };
